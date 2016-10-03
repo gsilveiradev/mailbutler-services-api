@@ -1,0 +1,66 @@
+{
+    "name": "guissilveira/laravel-api-example",
+    "description": "An API example built with Laravel Framework.",
+    "version": "1.0",
+    "keywords": ["framework", "laravel", "API", "REST"],
+    "license": "MIT",
+    "type": "project",
+    "homepage" : "https://github.com/guissilveira",
+    "authors": [
+        {
+            "name": "Guilherme Silveira da Silva",
+            "email": "guissilveira@gmail.com",
+            "homepage": "http://github.com/guissilveira",
+            "role": "Web Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "laravel/framework": "5.3.*",
+        "pacuna/schemas": "dev-master",
+        "tymon/jwt-auth": "dev-master",
+        "doctrine/dbal": "2.3",
+        "guissilveira/maildocker-laravel-driver": "^1.0",
+        "guissilveira/laravel-pgsql-multi-tenant-migrate": "^1.0"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.0",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Guissilveira\\MailDrivers\\Maildocker\\": "packages/guissilveira/maildocker-laravel-driver/src"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
