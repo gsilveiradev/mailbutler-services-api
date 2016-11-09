@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $users = collect([
                 ['name' => 'User', 'email' => 'user@user.com', 'password' => Hash::make('password')]
-            ])->each(function($user) {
+            ])->each(function ($user) {
                 User::create($user);
             });
 
