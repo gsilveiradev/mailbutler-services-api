@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
 {
     public function __construct()
     {
-       // 
+       //
     }
 
     public function authenticate(AuthenticationRequest $request)
@@ -27,13 +27,10 @@ class AuthenticationController extends Controller
         $credentials = $request->only('email', 'password');
 
         try {
-
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
-
         } catch (JWTException $e) {
-            
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
@@ -49,12 +46,11 @@ class AuthenticationController extends Controller
         return $responseAuth;
     }
 
-    public function forgot_password(AuthenticationForgotPasswordRequest $request)
+    public function forgotPassword(AuthenticationForgotPasswordRequest $request)
     {
         $user = User::where('email', '=', $request->email)->first();
 
         if (!$user) {
-
             return response()->json(array(
                 'message' => 'Validation error',
                 'errors' => array('email' => array('E-mail not found.'))
@@ -67,8 +63,10 @@ class AuthenticationController extends Controller
         $user->save();
 
         // Send email with new password
-        Mail::send('emails.forgot_password', ['user' => $user, 'new_password' => $newPassword], function ($message) use ($user) {
-
+        Mail::send('emails.forgot_password', [
+            'user' => $user,
+            'new_password' => $newPassword
+        ], function ($message) use ($user) {
             $message->to($user->email, $user->name)
                 ->subject('Recover your account password');
         });
@@ -78,14 +76,13 @@ class AuthenticationController extends Controller
         ), 200);
     }
 
-    public function change_password(AuthenticationChangePasswordRequest $request)
+    public function changePassword(AuthenticationChangePasswordRequest $request)
     {
         JWTAuth::parseToken();
 
         $user = JWTAuth::parseToken()->authenticate();
 
         if (!Hash::check($request->current_password, $user->password)) {
-
             return response()->json(array(
                 'message' => 'Validation error',
                 'errors' => array('The actual password does not match.')
@@ -100,7 +97,7 @@ class AuthenticationController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function logout() 
+    public function logout()
     {
         JWTAuth::invalidate(JWTAuth::getToken());
 
@@ -109,20 +106,16 @@ class AuthenticationController extends Controller
         ), 200);
     }
 
-    public function refresh_token()
+    public function refreshToken()
     {
         $token = JWTAuth::getToken();
 
-        if(!$token){
-            
+        if (!$token) {
             throw new BadRequestHtttpException('Token not provided');
         }
         try {
-            
             $token = JWTAuth::refresh($token);
-        }
-        catch (TokenInvalidException $e) {
-    
+        } catch (TokenInvalidException $e) {
             throw new AccessDeniedHttpException('The token is invalid');
         }
 

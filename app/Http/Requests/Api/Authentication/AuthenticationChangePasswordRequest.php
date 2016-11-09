@@ -12,7 +12,8 @@ class AuthenticationChangePasswordRequest extends Request
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
     
@@ -21,7 +22,8 @@ class AuthenticationChangePasswordRequest extends Request
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'current_password' => 'required',
             'password' => 'required',
