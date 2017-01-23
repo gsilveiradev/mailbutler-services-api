@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Authentication;
+namespace App\Http\Requests\Api\V1\Authentication;
 
 use App\Http\Requests\Request;
 
-class AuthenticationForgotPasswordRequest extends Request
+class AuthenticationRequest extends Request
 {
     
     /**
@@ -25,7 +25,9 @@ class AuthenticationForgotPasswordRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'password' => 'required'
+
         ];
     }
 }

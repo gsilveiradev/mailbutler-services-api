@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\Authentication;
+namespace App\Http\Controllers\Api\V1\Authentication;
 
-use App\Http\Requests\Api\Authentication\AuthenticationRequest;
-use App\Http\Requests\Api\Authentication\AuthenticationForgotPasswordRequest;
-use App\Http\Requests\Api\Authentication\AuthenticationChangePasswordRequest;
+use App\Http\Requests\Api\V1\Authentication\AuthenticationRequest;
+use App\Http\Requests\Api\V1\Authentication\AuthenticationForgotPasswordRequest;
+use App\Http\Requests\Api\V1\Authentication\AuthenticationChangePasswordRequest;
 
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;

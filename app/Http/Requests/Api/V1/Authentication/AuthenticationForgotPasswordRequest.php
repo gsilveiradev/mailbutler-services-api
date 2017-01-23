@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Authentication;
+namespace App\Http\Requests\Api\V1\Authentication;
 
 use App\Http\Requests\Request;
 
-class AuthenticationChangePasswordRequest extends Request
+class AuthenticationForgotPasswordRequest extends Request
 {
     
     /**
@@ -25,9 +25,7 @@ class AuthenticationChangePasswordRequest extends Request
     public function rules()
     {
         return [
-            'current_password' => 'required',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password'
+            'email' => 'required|email'
         ];
     }
 }
