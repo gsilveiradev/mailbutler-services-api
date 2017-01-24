@@ -36,6 +36,7 @@ git clone --recursive https://github.com/guissilveira/laravel-api-example.git
 ## 4) Run docker and start the containers
 
 - Start the docker machine: ```docker-machine start default```
+- Regenerate the certificates: ```docker-machine regenerate-certs default```
 - Execute: ```eval $(docker-machine env default)``` (You need to do this every time you start your docker-machine)
 - Go inside the laradock directory: ```cd laradock```
 - Up the docker containers: ```docker-compose up -d nginx mysql```
@@ -88,16 +89,22 @@ NAME      ACTIVE   DRIVER       STATE     URL                          SWARM   D
 default   *        virtualbox   Running   tcp://192.168.150.100:2376           v1.12.6
 ```
 
-Up containers with nginx and postgres:
+Up containers with nginx and mysql:
 
 ```
-docker-compose up -d nginx postgres
+docker-compose up -d nginx mysql
 ```
 
 List containers:
 
 ```
 docker-compose ps
+```
+
+Stop containers:
+
+```
+docker-compose stop
 ```
 
 Result:
@@ -107,7 +114,7 @@ Result:
 laradock_applications_1   /true                            Exit 0
 laradock_nginx_1          nginx                            Up       0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
 laradock_php-fpm_1        php-fpm                          Up       9000/tcp
-laradock_postgres_1       /docker-entrypoint.sh postgres   Up       0.0.0.0:5432->5432/tcp
+laradock_mysql_1          docker-entrypoint.sh mysql ...   Up       0.0.0.0:3306->3306/tcp
 laradock_workspace_1      /sbin/my_init                    Up       0.0.0.0:2222->22/tcp
 ```
 
