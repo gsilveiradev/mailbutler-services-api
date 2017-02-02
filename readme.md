@@ -53,13 +53,13 @@ git clone --recursive https://github.com/guissilveira/laravel-api-example.git
 
 Kudos! :clap:
 
-Your project is running on: http://192.168.150.100
+Your project is running on: http://192.168.160.100
 
 # Authentication Example
 
 ## Login
 
-Send a POST to ```http://192.168.150.100/api/v1/authentication/``` using e-mail=user@user.com and password=password params.
+Send a POST to ```http://192.168.160.100/api/v1/authentication/``` using e-mail=user@user.com and password=password params.
 
 ## Other routes
 
@@ -86,7 +86,7 @@ Result:
 
 ```
 NAME      ACTIVE   DRIVER       STATE     URL                          SWARM   DOCKER    ERRORS
-laravel-api-example   *        virtualbox   Running   tcp://192.168.150.100:2376           v1.12.6
+laravel-api-example   *        virtualbox   Running   tcp://192.168.160.100:2376           v1.12.6
 ```
 
 Up containers with nginx and mysql:
