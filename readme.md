@@ -12,17 +12,17 @@ Follow the steps to start and configure the project:
 
 Install Docker Toolbox: [Download](https://www.docker.com/products/docker-toolbox)
 
-## 2) Configure Host IP
+## 2) Create docker machine
 
-Because I am inside a network by IP 192.168.99.*, I needed to change the default Ip Address:
+Let's create the docker machine with specific IP range: ```docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.160.1/24" laravel-api-example```
 
-Open and edit the file: ```~/.docker/machine/machines/default/config.json```
+If you need to change something in cofiguration, like IP address, open and edit the file: ```~/.docker/machine/machines/laravel-api-example/config.json```
 
 ```
 #!json
 
-"IPAddress": "192.168.150.100",
-"HostOnlyCIDR": "192.168.150.1/24",
+"IPAddress": "192.168.160.100",
+"HostOnlyCIDR": "192.168.160.1/24",
 ```
 
 ## 3) Clone project
@@ -35,9 +35,9 @@ git clone --recursive https://github.com/guissilveira/laravel-api-example.git
 
 ## 4) Run docker and start the containers
 
-- Start the docker machine: ```docker-machine start default```
-- Regenerate the certificates: ```docker-machine regenerate-certs default```
-- Execute: ```eval $(docker-machine env default)``` (You need to do this every time you start your docker-machine)
+- Start the docker machine: ```docker-machine start laravel-api-example```
+- Regenerate the certificates: ```docker-machine regenerate-certs laravel-api-example```
+- Execute: ```eval $(docker-machine env laravel-api-example)``` (You need to do this every time you start your docker-machine)
 - Go inside the laradock directory: ```cd laradock```
 - Up the docker containers: ```docker-compose up -d nginx mysql```
 
@@ -69,11 +69,11 @@ See all routes file to test other available routes: ```routes/api.php```.
 
 ## Commands
 
-Start and pause the virtual machine (default):
+Start and pause the virtual machine (laravel-api-example):
 
 ```
-docker-machine start default
-docker-machine stop default
+docker-machine start laravel-api-example
+docker-machine stop laravel-api-example
 ```
 
 List virtual machines:
@@ -86,7 +86,7 @@ Result:
 
 ```
 NAME      ACTIVE   DRIVER       STATE     URL                          SWARM   DOCKER    ERRORS
-default   *        virtualbox   Running   tcp://192.168.150.100:2376           v1.12.6
+laravel-api-example   *        virtualbox   Running   tcp://192.168.150.100:2376           v1.12.6
 ```
 
 Up containers with nginx and mysql:
