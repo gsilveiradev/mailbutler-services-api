@@ -2,7 +2,10 @@
 
 Welcome to my example api built with Laravel and Docker dev environment with laradocker!
 
-This RESTful API use the api versioning concept.
+This RESTful API use the api versioning concept, JWT authentication and CORS enabled by default.
+- [Best practices for a pragmatic RESTful api](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+- [JWT auth for Laravel](https://github.com/tymondesigns/jwt-auth)
+- [Enable CORS for Laravel](https://github.com/barryvdh/laravel-cors)
 
 # Install
 
