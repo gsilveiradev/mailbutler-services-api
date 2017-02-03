@@ -21,7 +21,8 @@
         "tymon/jwt-auth": "dev-master",
         "doctrine/dbal": "2.3",
         "guissilveira/maildocker-laravel-driver": "^1.0",
-        "guissilveira/laravel-pgsql-multi-tenant-migrate": "^1.0"
+        "guissilveira/laravel-pgsql-multi-tenant-migrate": "^1.0",
+        "barryvdh/laravel-cors": "^0.8.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
