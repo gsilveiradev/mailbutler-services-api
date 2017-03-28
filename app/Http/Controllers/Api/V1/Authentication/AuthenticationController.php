@@ -8,6 +8,7 @@ use App\Http\Requests\Api\V1\Authentication\AuthenticationChangePasswordRequest;
 
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Mail\ForgotPassword;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
@@ -63,13 +64,10 @@ class AuthenticationController extends Controller
         $user->save();
 
         // Send email with new password
-        Mail::send('emails.forgot_password', [
-            'user' => $user,
-            'new_password' => $newPassword
-        ], function ($message) use ($user) {
-            $message->to($user->email, $user->name)
-                ->subject('Recover your account password');
-        });
+        $message = (new ForgotPassword($user, $newPassword))
+            ->onQueue('emails');
+
+        Mail::to($user->email, $user->name)->queue($message);
 
         return response()->json(array(
             'email' => $user->email
