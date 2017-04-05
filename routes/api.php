@@ -21,22 +21,30 @@ Route::group(['namespace' => 'Api', 'middleware' => 'cors'], function () {
         | Exclusive routes for authentication service
         |--------------------------------------------------------------------------
         */
-        Route::group(['namespace' => 'Authentication'], function () {
-            Route::post('/authentication', 'AuthenticationController@authenticate');
-            Route::post('/authentication/forgot_password', 'AuthenticationController@forgotPassword');
+        Route::post('/authentication', 'UsersAuthenticationController@authenticate');
+        Route::post('/authentication/forgot_password', 'UsersAuthenticationController@forgotPassword');
+
+        Route::group(['middleware' => ['jwt.auth']], function () {
+
+            Route::put('/authentication/change_password', 'UsersAuthenticationController@changePassword');
+            Route::post('/authentication/logout', 'UsersAuthenticationController@logout');
+
+            Route::get('/authentication/refresh_token', 'UsersAuthenticationController@refreshToken');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Routes with required login
+        |--------------------------------------------------------------------------
+        */
+        Route::group(['middleware' => ['jwt.auth']], function () {
 
             /*
             |--------------------------------------------------------------------------
-            | Routes with required login
+            | Exclusive routes for users service
             |--------------------------------------------------------------------------
             */
-            Route::group(['middleware' => ['jwt.auth']], function () {
-
-                Route::put('/authentication/change_password', 'AuthenticationController@changePassword');
-                Route::post('/authentication/logout', 'AuthenticationController@logout');
-
-                Route::get('/authentication/refresh_token', 'AuthenticationController@refreshToken');
-            });
+            Route::resource('users', 'UsersController');
         });
     });
 });
