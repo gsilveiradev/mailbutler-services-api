@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 abstract class Request extends FormRequest
 {
@@ -13,5 +14,13 @@ abstract class Request extends FormRequest
     public function wantsJson()
     {
         return true;
+    }
+
+    protected function formatErrors(Validator $validator)
+    {
+        return [
+            'error' => true,
+            'message' => $validator->errors()
+        ];
     }
 }

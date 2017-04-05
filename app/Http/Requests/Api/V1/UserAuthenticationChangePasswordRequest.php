@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Authentication;
+namespace App\Http\Requests\Api\V1;
 
 use App\Http\Requests\Request;
 
-class AuthenticationRequest extends Request
+class UserAuthenticationChangePasswordRequest extends Request
 {
-    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,7 +15,7 @@ class AuthenticationRequest extends Request
     {
         return true;
     }
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,9 +24,9 @@ class AuthenticationRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required'
-
+            'current_password' => 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password'
         ];
     }
 }

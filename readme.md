@@ -6,6 +6,7 @@ This RESTful API use the api versioning concept, JWT authentication and CORS ena
 - [Best practices for a pragmatic RESTful api](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 - [JWT auth for Laravel](https://github.com/tymondesigns/jwt-auth)
 - [Enable CORS for Laravel](https://github.com/barryvdh/laravel-cors)
+- [Repository Pattern](https://github.com/andersao/l5-repository)
 
 # Install
 
