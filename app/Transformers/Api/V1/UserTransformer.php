@@ -11,7 +11,6 @@ use App\Entities\Api\V1\User;
  */
 class UserTransformer extends TransformerAbstract
 {
-
     /**
      * Transform the \User entity
      * @param \User $model

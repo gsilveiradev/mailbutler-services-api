@@ -13,7 +13,6 @@ use App\Http\Requests\Api\V1\UserUpdateRequest;
 use App\Repositories\Api\V1\UserRepository;
 use App\Validators\Api\V1\UserValidator;
 
-
 class UsersController extends Controller
 {
     /**
@@ -63,7 +62,7 @@ class UsersController extends Controller
 
             $response = [
                 'message' => 'User created.',
-                'data'    => $user->toArray(),
+                'data'    => $user,
             ];
 
             return response()->json($response);
@@ -109,7 +108,7 @@ class UsersController extends Controller
 
             $response = [
                 'message' => 'User updated.',
-                'data'    => $user->toArray(),
+                'data'    => $user,
             ];
 
             return response()->json($response);

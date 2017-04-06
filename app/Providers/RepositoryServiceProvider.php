@@ -23,8 +23,14 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\App\Repositories\Api\V1\UserRepository::class, \App\Repositories\Api\V1\UserRepositoryEloquent::class);
-        $this->app->bind(\App\Repositories\Api\V1\UserTestRepository::class, \App\Repositories\Api\V1\UserTestRepositoryEloquent::class);
+        $this->app->bind(
+            \App\Repositories\Api\V1\UserRepository::class,
+            \App\Repositories\Api\V1\UserRepositoryEloquent::class
+        );
+        $this->app->bind(
+            \App\Repositories\Api\V1\UserTestRepository::class,
+            \App\Repositories\Api\V1\UserTestRepositoryEloquent::class
+        );
         //:end-bindings:
     }
 }

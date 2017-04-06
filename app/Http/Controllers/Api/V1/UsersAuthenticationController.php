@@ -19,7 +19,6 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Mail;
 use Hash;
 
-
 class UsersAuthenticationController extends Controller
 {
     /**
@@ -59,12 +58,13 @@ class UsersAuthenticationController extends Controller
                 return response()->json($response, 401);
             }
 
-            $user = $this->repository->findByField('email', $request->email)->first();
-            $user->token = $token;
+            $user = $this->repository->skipPresenter()->findByField('email', $request->email)->first();
+            $user = $user->presenter();
+            $user['token'] = $token;
 
             $response = [
                 'message' => 'User logged.',
-                'data'    => $user->toArray(),
+                'data'    => $user,
             ];
 
             return response()->json($response);
@@ -79,7 +79,7 @@ class UsersAuthenticationController extends Controller
     public function forgotPassword(UserAuthenticationForgotPasswordRequest $request)
     {
         try {
-            $user = $this->repository->findByField('email', $request->email)->first();
+            $user = $this->repository->skipPresenter()->findByField('email', $request->email)->first();
 
             if (!$user) {
                 return response()->json([
@@ -103,7 +103,7 @@ class UsersAuthenticationController extends Controller
 
             $response = [
                 'message' => 'User forgot password instructions sent by email.',
-                'data'    => $user->toArray(),
+                'data'    => $user->presenter(),
             ];
 
             return response()->json($response);
@@ -139,7 +139,7 @@ class UsersAuthenticationController extends Controller
 
             $response = [
                 'message' => 'User password changed.',
-                'data'    => $user->toArray(),
+                'data'    => $user,
             ];
 
             return response()->json($response);

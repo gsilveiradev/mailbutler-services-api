@@ -24,6 +24,11 @@ Route::group(['namespace' => 'Api', 'middleware' => 'cors'], function () {
         Route::post('/authentication', 'UsersAuthenticationController@authenticate');
         Route::post('/authentication/forgot_password', 'UsersAuthenticationController@forgotPassword');
 
+        /*
+        |--------------------------------------------------------------------------
+        | Routes with required login
+        |--------------------------------------------------------------------------
+        */
         Route::group(['middleware' => ['jwt.auth']], function () {
 
             Route::put('/authentication/change_password', 'UsersAuthenticationController@changePassword');
