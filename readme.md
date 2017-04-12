@@ -1,6 +1,6 @@
-# API Example
+# Mailbutler Services API
 
-Welcome to my example api built with Laravel and Docker dev environment with laradocker!
+Welcome to my api built with Laravel and Docker dev environment with laradocker!
 
 This RESTful API use the api versioning concept, JWT authentication and CORS enabled by default.
 - [Best practices for a pragmatic RESTful api](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
@@ -18,15 +18,15 @@ Install Docker Toolbox: [Download](https://www.docker.com/products/docker-toolbo
 
 ## 2) Create docker machine
 
-Let's create the docker machine with specific IP range: ```docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.160.1/24" laravel-api-example```
+Let's create the docker machine with specific IP range: ```docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.20.1/24" ms-api```
 
-If you need to change something in cofiguration, like IP address, open and edit the file: ```~/.docker/machine/machines/laravel-api-example/config.json```
+If you need to change something in cofiguration, like IP address, open and edit the file: ```~/.docker/machine/machines/ms-api/config.json```
 
 ```
 #!json
 
-"IPAddress": "192.168.160.100",
-"HostOnlyCIDR": "192.168.160.1/24",
+"IPAddress": "192.168.20.100",
+"HostOnlyCIDR": "192.168.20.1/24",
 ```
 
 ## 3) Clone project
@@ -34,16 +34,16 @@ If you need to change something in cofiguration, like IP address, open and edit 
 Clone the project inside your local repo directory (--recursive option is used to clone the submodules too):
 
 ```
-git clone --recursive https://github.com/guissilveira/laravel-api-example.git
+git clone --recursive https://github.com/guissilveira/mailbutler-services-api.git
 ```
 
 ## 4) Run docker and start the containers
 
-- Start the docker machine: ```docker-machine start laravel-api-example```
-- Regenerate the certificates: ```docker-machine regenerate-certs laravel-api-example```
-- Execute: ```eval $(docker-machine env laravel-api-example)``` (You need to do this every time you start your docker-machine)
+- Start the docker machine: ```docker-machine start ms-api```
+- Regenerate the certificates: ```docker-machine regenerate-certs ms-api```
+- Execute: ```eval $(docker-machine env ms-api)``` (You need to do this every time you start your docker-machine)
 - Go inside the laradock directory: ```cd laradock```
-- Up the docker containers: ```docker-compose up -d nginx mysql```
+- Up the docker containers: ```docker-compose up -d nginx postgres```
 
 ## 5) Configure the project
 
@@ -57,13 +57,13 @@ git clone --recursive https://github.com/guissilveira/laravel-api-example.git
 
 Kudos! :clap:
 
-Your project is running on: http://192.168.160.100
+Your project is running on: http://192.168.20.100
 
 # Authentication Example
 
 ## Login
 
-Send a POST to ```http://192.168.160.100/api/v1/authentication/``` using e-mail=user@user.com and password=password params.
+Send a POST to ```http://192.168.20.100/api/v1/authentication/``` using e-mail=user@user.com and password=password params.
 
 ## Other routes
 
@@ -73,11 +73,11 @@ See all routes file to test other available routes: ```routes/api.php```.
 
 ## Commands
 
-Start and pause the virtual machine (laravel-api-example):
+Start and pause the virtual machine (ms-api):
 
 ```
-docker-machine start laravel-api-example
-docker-machine stop laravel-api-example
+docker-machine start ms-api
+docker-machine stop ms-api
 ```
 
 List virtual machines:
@@ -90,13 +90,13 @@ Result:
 
 ```
 NAME      ACTIVE   DRIVER       STATE     URL                          SWARM   DOCKER    ERRORS
-laravel-api-example   *        virtualbox   Running   tcp://192.168.160.100:2376           v1.12.6
+ms-api   *        virtualbox   Running   tcp://192.168.20.100:2376           v1.12.6
 ```
 
-Up containers with nginx and mysql:
+Up containers with nginx and postgres:
 
 ```
-docker-compose up -d nginx mysql
+docker-compose up -d nginx postgres
 ```
 
 List containers:
@@ -118,7 +118,7 @@ Result:
 laradock_applications_1   /true                            Exit 0
 laradock_nginx_1          nginx                            Up       0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
 laradock_php-fpm_1        php-fpm                          Up       9000/tcp
-laradock_mysql_1          docker-entrypoint.sh mysql ...   Up       0.0.0.0:3306->3306/tcp
+laradock_postgres_1          docker-entrypoint.sh postgres ...   Up       0.0.0.0:3306->3306/tcp
 laradock_workspace_1      /sbin/my_init                    Up       0.0.0.0:2222->22/tcp
 ```
 
